@@ -51,6 +51,12 @@ void ACMCharacterBase::BeginPlay()
 
 	check(GEngine != nullptr);
 
+	if (IsValid(FirstPersonAnimBP)) {
+
+		PlayerMesh->SetAnimInstanceClass(FirstPersonAnimBP->GeneratedClass);
+		GetMesh()->SetAnimInstanceClass(FirstPersonAnimBP->GeneratedClass);
+
+	}
 	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))

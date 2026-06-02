@@ -66,6 +66,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Input | Camera")
 	FVector FirstPersonCameraOffset = FVector(2.8f, 5.9f, 0.0f);
 
+	UPROPERTY(EditAnywhere, Category = "Animation")
+	TObjectPtr<UAnimBlueprint> FirstPersonAnimBP;
 	UPROPERTY(EditAnywhere, Category = "Input | Camera")
 	float FirstPersonFOV = 70.f;
 
