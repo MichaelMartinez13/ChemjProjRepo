@@ -1,0 +1,31 @@
+// Fill out your copyright notice in the Description page of Project Settings.
+
+#pragma once
+
+#include "CoreMinimal.h"
+#include "GameFramework/PlayerState.h"
+#include "AbilitySystemInterface.h"
+#include "AbilitySystem/CMAbilitySystemComponent.h"
+#include "CMPlayerState.generated.h"
+
+/**
+ * 
+ */
+UCLASS()
+class CHEMPROJREPO_API ACMPlayerState : public APlayerState, public IAbilitySystemInterface
+{
+	GENERATED_BODY()
+
+public:
+	ACMPlayerState();
+	
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+protected:
+	
+
+public:
+
+	UPROPERTY()
+	TObjectPtr<UCMAbilitySystemComponent> ASC;
+};

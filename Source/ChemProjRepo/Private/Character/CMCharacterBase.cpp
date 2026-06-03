@@ -2,6 +2,8 @@
 
 
 #include "Character/CMCharacterBase.h"
+#include "Character/Player/CMPlayerState.h"
+
 
 // Sets default values
 ACMCharacterBase::ACMCharacterBase()
@@ -43,28 +45,92 @@ ACMCharacterBase::ACMCharacterBase()
 
 }
 
-// Called when the game starts or when spawned
-void ACMCharacterBase::BeginPlay()
+UAbilitySystemComponent* ACMCharacterBase::GetAbilitySystemComponent() const
 {
-	Super::BeginPlay();
+	return ASC;
+}
 
+// Called when the game starts or when spawned
+/*void ACMCharacterBase::BeginPlay()
+{
+	Super::BeginPlay();	
+}
+*/
+/*
+	This function is called when the character is possessed by a controller. 
+	It initializes the ability system component (ASC) for the character by 
+	getting the player state and setting up the ASC with the player state and the character itself.
+	This allows the character to use abilities defined in the ASC.
+	This has a similar effect to begin play, 
+	but is specifically for when the character is possessed,
+	which can happen multiple times during the game (e.g., when a player respawns).
+	Begin play will be depricated in the future, so this is the recommended place to initialize the ASC for player characters.
+	*/
+void ACMCharacterBase::PossessedBy(AController* thisController)
+{
+	Super::PossessedBy(thisController);
 
+	//Imported from begin play 
 	check(GEngine != nullptr);
 
+	
+	InitAbilitySystemComponent();
+	GiveDefaultAbilities();
+
+	//Checks if animation is valid, preventing potential crashes if the animation blueprint is not set up correctly.
 	if (IsValid(FirstPersonAnimBP)) {
 
 		PlayerMesh->SetAnimInstanceClass(FirstPersonAnimBP->GeneratedClass);
 		GetMesh()->SetAnimInstanceClass(FirstPersonAnimBP->GeneratedClass);
 
 	}
-	if (APlayerController* PlayerController = Cast<APlayerController>(Controller))
+
+	/*If there is a valid player controller, we get the enhanced input subsystem for the local player
+	and add the input mapping context for the first person character.*/
+	if (APlayerController* PlayerController = Cast<APlayerController>(thisController))
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* Subsystem = ULocalPlayer::GetSubsystem<UEnhancedInputLocalPlayerSubsystem>(PlayerController->GetLocalPlayer()))
 		{
 			Subsystem->AddMappingContext(FirstPersonContext, 0);
 		}
 	}
-	
+}
+
+//initialized ASC on the client, ensuring that the client has the necessary information to use abilities defined in the ASC.
+void ACMCharacterBase::OnRep_PlayerState()
+{
+	Super::OnRep_PlayerState();
+
+	InitAbilitySystemComponent();
+}
+
+void ACMCharacterBase::GiveDefaultAbilities()
+{
+	if (!IsValid(ASC)) return;
+	check(ASC);
+	if (!HasAuthority()) return;
+
+	/*
+	  Loops through the DefaultAbilities array,
+	  creating a FGameplayAbilitySpec for each ability class 
+	  and giving it to the ASC using the GiveAbility function.
+	*/
+	for(TSubclassOf<UGameplayAbility>& AbilityClass : DefaultAbilities)
+	{
+		const FGameplayAbilitySpec AbilitySpec(AbilityClass, 1);
+		ASC->GiveAbility(AbilitySpec);
+	}
+}
+
+void ACMCharacterBase::InitAbilitySystemComponent()
+{
+	ACMPlayerState* CMPlayerState = GetPlayerState<ACMPlayerState>();
+	if (!IsValid(CMPlayerState)) return;
+	check(CMPlayerState);
+
+	//CastChecked is used to ensure that the player state has the correct type and that it implements the ability system interface.
+	ASC = CastChecked<UCMAbilitySystemComponent>(CMPlayerState->GetAbilitySystemComponent());
+	ASC->InitAbilityActorInfo(CMPlayerState, this);
 }
 
 

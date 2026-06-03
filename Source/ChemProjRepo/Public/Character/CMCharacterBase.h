@@ -10,6 +10,8 @@
 #include "InputActionValue.h"
 #include "InputTriggers.h"
 #include "Camera/CameraComponent.h"
+#include "AbilitySystemInterface.h"
+#include "AbilitySystem/CMAbilitySystemComponent.h"
 #include "CMCharacterBase.generated.h"
 
 
@@ -18,8 +20,10 @@ class UInputMappingContext;
 class UInputAction; 
 class UInputComponent;
 
+
+
 UCLASS()
-class CHEMPROJREPO_API ACMCharacterBase : public ACharacter
+class CHEMPROJREPO_API ACMCharacterBase : public ACharacter, public IAbilitySystemInterface
 {
 	GENERATED_BODY()
 
@@ -27,9 +31,17 @@ public:
 	// Sets default values for this character's properties
 	ACMCharacterBase();
 
+	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+	
+
 protected:
 	// Called when the game starts or when spawned
-	virtual void BeginPlay() override;
+	//virtual void BeginPlay() override;
+
+	virtual void PossessedBy(AController* thisController) override;
+	virtual void OnRep_PlayerState() override;
+	
+	void GiveDefaultAbilities();
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputMappingContext> FirstPersonContext;
@@ -37,6 +49,11 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> PlayerMove;
 
+	UPROPERTY()
+	TObjectPtr<UCMAbilitySystemComponent> ASC;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Ability")
+	TArray<TSubclassOf<UGameplayAbility>> DefaultAbilities;
 	
 
 public:	
@@ -73,5 +90,8 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Input | Camera")
 	float FirstPersonViewScale = 0.6f;
+	
+private: 
+	void InitAbilitySystemComponent();
 
 };
