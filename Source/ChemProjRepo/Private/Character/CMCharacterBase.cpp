@@ -43,6 +43,9 @@ ACMCharacterBase::ACMCharacterBase()
 	FirstPersonCameraComponent->FirstPersonFieldOfView = FirstPersonFOV;
 	FirstPersonCameraComponent->FirstPersonScale = FirstPersonViewScale;
 
+	ASC = CreateDefaultSubobject<UCMAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	PointAttributeSet = CreateDefaultSubobject<UCMPointAttributeSet>(TEXT("PointAttributeSet"));
+
 }
 
 UAbilitySystemComponent* ACMCharacterBase::GetAbilitySystemComponent() const

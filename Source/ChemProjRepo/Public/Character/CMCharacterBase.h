@@ -12,7 +12,9 @@
 #include "Camera/CameraComponent.h"
 #include "AbilitySystemInterface.h"
 #include "AbilitySystem/CMAbilitySystemComponent.h"
+#include "AttributeSets/CMPointAttributeSet.h"
 #include "CMCharacterBase.generated.h"
+
 
 
 
@@ -31,8 +33,19 @@ public:
 	// Sets default values for this character's properties
 	ACMCharacterBase();
 
+	// Called every frame
+	virtual void Tick(float DeltaTime) override;
+
+	// Called to bind functionality to input
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
+	UFUNCTION()
+	void Move(const FInputActionValue& Value);
+
+	UFUNCTION()
+	void Look(const FInputActionValue& Value);
 
 protected:
 	// Called when the game starts or when spawned
@@ -57,18 +70,8 @@ protected:
 	
 
 public:	
-	// Called every frame
-	virtual void Tick(float DeltaTime) override;
-
-	// Called to bind functionality to input
-	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
-
-	UFUNCTION()
-	void Move(const FInputActionValue& Value);
 	
-	UFUNCTION()
-	void Look(const FInputActionValue& Value);
-	
+
 	UPROPERTY(VisibleDefaultsOnly, BlueprintReadOnly, Category = "Chained|Input", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UArrowComponent> PlayerArrow;
 
@@ -90,6 +93,9 @@ public:
 
 	UPROPERTY(EditAnywhere, Category = "Input | Camera")
 	float FirstPersonViewScale = 0.6f;
+
+	UPROPERTY()
+	UCMPointAttributeSet* PointAttributeSet;
 	
 private: 
 	void InitAbilitySystemComponent();
