@@ -79,7 +79,8 @@ void ACMCharacterBase::PossessedBy(AController* thisController)
 	
 	InitAbilitySystemComponent();
 	GiveDefaultAbilities();
-
+	
+	
 	//Checks if animation is valid, preventing potential crashes if the animation blueprint is not set up correctly.
 	if (IsValid(FirstPersonAnimBP)) {
 

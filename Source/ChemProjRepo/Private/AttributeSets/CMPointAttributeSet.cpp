@@ -11,7 +11,8 @@ UCMPointAttributeSet::UCMPointAttributeSet()
 
 }
 
-void UCMPointAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue)
+//PreAttributeBaseChange: Clamps the BaseValue.  Use this to enforce permanent limits on stats.
+void UCMPointAttributeSet::PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const
 {
 	if(Attribute == GetBasePointsAttribute())
 	{
@@ -20,7 +21,7 @@ void UCMPointAttributeSet::PreAttributeChange(const FGameplayAttribute& Attribut
 
 	//Super is used to call the parent class's implementation of the function,
 	// in this case UAttributeSet's PreAttributeChange function.
-	Super::PreAttributeChange(Attribute, NewValue);
+	Super::PreAttributeBaseChange(Attribute, NewValue);
 	
 }
 
@@ -66,6 +67,7 @@ void UCMPointAttributeSet::PostGameplayEffectExecute(const struct FGameplayEffec
 			SetBasePoints(NewPointsValue);
 			UE_LOG(LogTemp, Warning, TEXT("PostGameplayEffectExecute: BasePoints changed to %f"), NewPointsValue);
 			//OnPointsChanged.Broadcast(this, OldPointsValue, NewPointsValue);
+
 		}
 		SetPointModifier(0.f);
 	}

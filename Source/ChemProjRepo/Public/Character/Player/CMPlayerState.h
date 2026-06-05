@@ -6,6 +6,7 @@
 #include "GameFramework/PlayerState.h"
 #include "AbilitySystemInterface.h"
 #include "AbilitySystem/CMAbilitySystemComponent.h"
+#include "AttributeSets/CMPointAttributeSet.h"
 #include "CMPlayerState.generated.h"
 
 /**
@@ -26,6 +27,9 @@ protected:
 
 public:
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ASC | Attributes")
 	TObjectPtr<UCMAbilitySystemComponent> ASC;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ASC | Attributes")
+	TObjectPtr <UCMPointAttributeSet> PointAttributeSet;
 };

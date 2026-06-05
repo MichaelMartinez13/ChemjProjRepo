@@ -6,7 +6,7 @@
 #include "AbilitySystemComponent.h"
 #include "CMAbilitySystemComponent.generated.h"
 
-UCLASS()
+UCLASS(ClassGroup=(Custom), meta=(BlueprintSpawnableComponent))
 class CHEMPROJREPO_API UCMAbilitySystemComponent : public UAbilitySystemComponent
 {
 	GENERATED_BODY()

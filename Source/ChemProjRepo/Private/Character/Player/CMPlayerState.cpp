@@ -9,6 +9,7 @@ ACMPlayerState::ACMPlayerState()
 	NetUpdateFrequency = 100.f;
 
 	ASC = CreateDefaultSubobject<UCMAbilitySystemComponent>(TEXT("AbilitySystemComponent"));
+	PointAttributeSet = CreateDefaultSubobject<UCMPointAttributeSet>(TEXT("PointAttributeSet"));
 	ASC->SetReplicationMode(EGameplayEffectReplicationMode::Mixed);
 }
 

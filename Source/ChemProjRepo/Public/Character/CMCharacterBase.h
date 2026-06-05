@@ -62,7 +62,7 @@ protected:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "Input")
 	TObjectPtr<UInputAction> PlayerMove;
 
-	UPROPERTY()
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ASC | Attributes")
 	TObjectPtr<UCMAbilitySystemComponent> ASC;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Ability")
@@ -94,8 +94,8 @@ public:
 	UPROPERTY(EditAnywhere, Category = "Input | Camera")
 	float FirstPersonViewScale = 0.6f;
 
-	UPROPERTY()
-	UCMPointAttributeSet* PointAttributeSet;
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ASC | Attributes")
+	TObjectPtr <UCMPointAttributeSet> PointAttributeSet;
 	
 private: 
 	void InitAbilitySystemComponent();

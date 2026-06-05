@@ -31,7 +31,7 @@ class CHEMPROJREPO_API UCMPointAttributeSet : public UAttributeSet
 public: 
 	UCMPointAttributeSet();
 
-	virtual void PreAttributeChange(const FGameplayAttribute& Attribute, float& NewValue) override;
+	virtual void PreAttributeBaseChange(const FGameplayAttribute& Attribute, float& NewValue) const override;
 	virtual void PostAttributeChange(const FGameplayAttribute& Attribute, float OldValue, float NewValue) override;
 	virtual void PostGameplayEffectExecute(const struct FGameplayEffectModCallbackData& Data) override;
 
@@ -43,11 +43,11 @@ public:
 	ATTRIBUTE_ACCESSORS(UCMPointAttributeSet, CurrentPoints)
 
 	//BaseValue is used for permanent changes, for example a level up that increase max health by 10.
-	UPROPERTY()
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FGameplayAttributeData BasePoints;
 	ATTRIBUTE_ACCESSORS(UCMPointAttributeSet, BasePoints)
 
-	UPROPERTY(EditAnywhere, BlueprintReadOnly)
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly)
 	FGameplayAttributeData MaxPoints;
 	ATTRIBUTE_ACCESSORS(UCMPointAttributeSet, MaxPoints)
 
