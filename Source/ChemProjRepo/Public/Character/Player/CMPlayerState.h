@@ -12,6 +12,9 @@
 /**
  * 
  */
+
+class FActorSaveData;
+
 UCLASS()
 class CHEMPROJREPO_API ACMPlayerState : public APlayerState, public IAbilitySystemInterface
 {
@@ -21,6 +24,15 @@ public:
 	ACMPlayerState();
 	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
+
+/*	UFUNCTION(EditAnywhere, Category = "ASC | Attributes | Save State")
+	void Save(FActorSaveData& SaveData);
+	
+	UFUNCTION(EditAnywhere, Category = "ASC | Attributes | Save State")
+	void RestoreSave(FActorSaveData& SaveData);
+	
+	*/
+
 
 protected:
 	
@@ -32,4 +44,6 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ASC | Attributes")
 	TObjectPtr <UCMPointAttributeSet> PointAttributeSet;
+
+	
 };
