@@ -3,6 +3,9 @@
 
 #include "Character/CMCharacterBase.h"
 #include "Character/Player/CMPlayerState.h"
+#include "Engine/AssetManager.h"
+#include "Engine/StreamableManager.h"
+#include "GameState/CMGameStateBase.h"
 
 
 // Sets default values
@@ -114,16 +117,32 @@ void ACMCharacterBase::GiveDefaultAbilities()
 	check(ASC);
 	if (!HasAuthority()) return;
 
+	ACMGameStateBase* GameState = GetWorld()->GetGameState<ACMGameStateBase>();
+	if (IsValid(GameState))
+	{
+		GameState->RegisterLoad();
+
+		for (TSubclassOf<UGameplayAbility>& AbilityClass : DefaultAbilities)
+		{
+			const FGameplayAbilitySpec AbilitySpec(AbilityClass, 1);
+			ASC->GiveAbility(AbilitySpec);
+		}
+
+		if (IsValid(GameState)) GameState->MarkLoadComplete();
+
+		//UAssetManager::GetStreamableManager().RequestAsyncLoad(StartupData.ToSoftObjectPath(), FStreamableDelegate::CreateLambda([this, GameState]()
+			//{
+				
+			//}
+		//));
+	}
+
 	/*
 	  Loops through the DefaultAbilities array,
 	  creating a FGameplayAbilitySpec for each ability class 
 	  and giving it to the ASC using the GiveAbility function.
 	*/
-	for(TSubclassOf<UGameplayAbility>& AbilityClass : DefaultAbilities)
-	{
-		const FGameplayAbilitySpec AbilitySpec(AbilityClass, 1);
-		ASC->GiveAbility(AbilitySpec);
-	}
+	
 }
 
 void ACMCharacterBase::InitAbilitySystemComponent()
