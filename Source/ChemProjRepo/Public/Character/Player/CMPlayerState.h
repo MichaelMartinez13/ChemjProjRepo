@@ -9,11 +9,12 @@
 #include "AttributeSets/CMPointAttributeSet.h"
 #include "CMPlayerState.generated.h"
 
+class CMPlayerSaveGame;
+class ACMPlayerController;
 /**
  * 
  */
 
-class FActorSaveData;
 
 UCLASS()
 class CHEMPROJREPO_API ACMPlayerState : public APlayerState, public IAbilitySystemInterface
@@ -32,6 +33,15 @@ public:
 	void RestoreSave(FActorSaveData& SaveData);
 	
 	*/
+	UFUNCTION()
+	 void SavePlayerState(UCMPlayerSaveGame* SaveGame);
+	
+	UFUNCTION()
+	void LoadPlayerState(UCMPlayerSaveGame* SaveGame);
+	
+	//UFUNCTION()
+	//void HandleStartingNewPlayer_Implementation(ACMPlayerController* PlayerController);
+	
 
 
 protected:
@@ -45,5 +55,4 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ASC | Attributes")
 	TObjectPtr <UCMPointAttributeSet> PointAttributeSet;
 
-	
 };

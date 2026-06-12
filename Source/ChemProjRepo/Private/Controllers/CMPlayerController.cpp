@@ -15,6 +15,7 @@ void ACMPlayerController::BeginPlay()
 		if (!CMGameState->bIsGameReady) 
 		{
 			DisableInput(this);
+			//LoadGameData();
 			CMGameState->OnGameReady().AddUObject(this, &ACMPlayerController::HandleGameReady);
 		}
 	}
@@ -50,6 +51,7 @@ void ACMPlayerController::SaveGameData()
 	FAsyncSaveGameToSlotDelegate OnSaved;
 	OnSaved.BindUObject(this, &ACMPlayerController::OnGameSaved);
 	UGameplayStatics::AsyncSaveGameToSlot(SaveInstance, SlotName, UserIndex, OnSaved);
+
 }
 
 

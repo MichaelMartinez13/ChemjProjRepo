@@ -3,12 +3,66 @@
 #pragma once
 
 #include "CoreMinimal.h"
+
 #include "GameFramework/SaveGame.h"
 #include "CMPlayerSaveGame.generated.h"
 
+class ACMPlayerState;
 /**
  * 
  */
+USTRUCT()
+struct FPlayerSaveData
+{
+	GENERATED_BODY()
+
+public:  
+	FPlayerSaveData() 
+	{
+		Points = 0;
+		Location = FVector::ZeroVector;
+		Rotation = FRotator::ZeroRotator;
+		bResumeAtTransform = true;
+
+	}
+
+	UPROPERTY()
+	FString PlayerID;
+
+	UPROPERTY()
+	int32 Points;
+	
+	UPROPERTY()
+	FRotator Rotation; 
+
+	UPROPERTY()
+	FVector Location;
+
+	UPROPERTY()
+	bool bResumeAtTransform;
+
+
+};
+
+USTRUCT()
+struct FActorSaveData
+{
+	GENERATED_BODY()
+
+public:  
+
+	UPROPERTY()
+	FName ActorName;
+
+	UPROPERTY()
+	FTransform Transform;
+	
+	UPROPERTY()
+	TArray<uint8> ByteData;
+
+
+};
+
 UCLASS()
 class CHEMPROJREPO_API UCMPlayerSaveGame : public USaveGame
 {
@@ -27,4 +81,12 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "SaveData")
 	TArray<FName> InventoryItemIDs;
+
+	UPROPERTY()
+	TArray<FPlayerSaveData> SavedPlayerData;
+
+	UPROPERTY()
+	TMap<FName, FActorSaveData> SavedActorData;
+
+	FPlayerSaveData* GetPlayerData(ACMPlayerState* PlayerState);
 };
