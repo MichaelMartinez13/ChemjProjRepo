@@ -17,7 +17,7 @@ void ACMGameModeBase::BeginPlay()
 		ActiveLoadingScreen = CreateWidget<UUserWidget>(GetWorld(), LoadingScreenWidget);
 		if (IsValid(ActiveLoadingScreen))
 		{
-		
+			CurrentSaveGame = CastChecked<UCMPlayerSaveGame>(UGameplayStatics::CreateSaveGameObject(UCMPlayerSaveGame::StaticClass()));
 			ActiveLoadingScreen->AddToViewport();
 		}
 	}
@@ -84,13 +84,29 @@ void ACMGameModeBase::LoadSaveGame()
 			return;
 		}
 		UE_LOG(LogTemp, Log, TEXT("Loaded Save Data"));
+		
+		AGameStateBase* PlayerGameState = GetWorld()->GetGameState();
+
+		if (!IsValid(PlayerGameState)) return;
+
+		for (int32 i = 0; i < PlayerGameState->PlayerArray.Num(); i++)
+		{
+			ACMPlayerState* CMPlayerState = CastChecked<ACMPlayerState>(PlayerGameState->PlayerArray[i]);
+			if (IsValid(CMPlayerState))
+			{
+				CMPlayerState->LoadPlayerState(CurrentSaveGame);
+				break;
+
+			}
+		}
+		UGameplayStatics::LoadGameFromSlot("PlayerSlot", 0);
 		OnSaveGameLoaded.Broadcast(CurrentSaveGame);
 	}
 	else 
 	{
 		CurrentSaveGame = CastChecked<UCMPlayerSaveGame>(UGameplayStatics::CreateSaveGameObject(UCMPlayerSaveGame::StaticClass()));
-
-		UE_LOG(LogTemp, Log, TEXT("Created New Save game data!"));
+	
+		UE_LOG(LogTemp, Error, TEXT("Created New Save game data!"));
 	}
 	
 }

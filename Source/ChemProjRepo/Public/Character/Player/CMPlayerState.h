@@ -33,10 +33,10 @@ public:
 	void RestoreSave(FActorSaveData& SaveData);
 	
 	*/
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	 void SavePlayerState(UCMPlayerSaveGame* SaveGame);
 	
-	UFUNCTION()
+	UFUNCTION(BlueprintCallable)
 	void LoadPlayerState(UCMPlayerSaveGame* SaveGame);
 	
 	//UFUNCTION()

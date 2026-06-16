@@ -29,7 +29,7 @@ void ACMPlayerController::HandleGameReady()
 void ACMPlayerController::SaveGameData()
 {
 
-	const FString SlotName = TEXT("MainSlot");
+	const FString SlotName = TEXT("PlayerSlot");
 	const int32 UserIndex = 0;
 
 	if (!IsValid(SaveInstance)) return;
@@ -70,7 +70,7 @@ void ACMPlayerController::OnGameSaved(const FString& SlotName, const int32 UserI
 
 void ACMPlayerController::LoadGameData()
 {
-	const FString SlotName = TEXT("MainSlot"); 
+	const FString SlotName = TEXT("PlayerSlot"); 
 	const int32 UserIndex = 0;
 
 	if (!UGameplayStatics::DoesSaveGameExist(SlotName, UserIndex)) 
