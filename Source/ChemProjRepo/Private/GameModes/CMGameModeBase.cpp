@@ -25,6 +25,13 @@ void ACMGameModeBase::BeginPlay()
 
 }
 
+void ACMGameModeBase::Logout(AController* PlayerExit)
+{
+	Super::Logout(PlayerExit);
+
+	WriteSaveGame();
+}
+
 void ACMGameModeBase::CheckIfGameReady()
 {
 	ACMGameStateBase* PlayerGameState = Cast<ACMGameStateBase>(GameState);

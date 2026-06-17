@@ -42,6 +42,9 @@ public: //FUNCTIONS
 
 	virtual void BeginPlay() override;
 
+	virtual void Logout(AController* PlayerExit) override;
+	
+	
 	void CheckIfGameReady();
 
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
@@ -49,6 +52,7 @@ public: //FUNCTIONS
 	
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 	void LoadSaveGame();
+
 	//virtual void HandleStartingNewPlayer_Implementation(APlayerController* Player) override;
 
 };
