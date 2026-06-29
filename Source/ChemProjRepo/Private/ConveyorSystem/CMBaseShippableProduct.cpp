@@ -16,6 +16,7 @@ ACMBaseShippableProduct::ACMBaseShippableProduct() {
 	BoxCollision->SetCollisionResponseToAllChannels(ECR_Block);
 	BoxCollision->SetGenerateOverlapEvents(true);
 	BoxCollision->SetSimulatePhysics(true);
+	BoxCollision->SetMassOverrideInKg(NAME_None, 10.0f, true);
 
 	BoxCollision->BodyInstance.bLockXRotation = true;
 	BoxCollision->BodyInstance.bLockYRotation = true;
