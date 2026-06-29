@@ -24,10 +24,10 @@ public:
 	ACMBaseShippableProduct();
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UBoxComponent* BoxCollision;
+	TObjectPtr <UBoxComponent> BoxCollision;
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
-	UStaticMeshComponent* StaticMesh;
+	TObjectPtr <UStaticMeshComponent> StaticMesh;
 
 	// Determines the direction the product moves in
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Shipping")
