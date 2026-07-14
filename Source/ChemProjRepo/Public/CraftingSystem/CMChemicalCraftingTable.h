@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
+#include "Camera/CameraComponent.h"
 #include "CMChemicalCraftingTable.generated.h"
 
 UCLASS()
@@ -14,6 +15,9 @@ class CHEMPROJREPO_API ACMChemicalCraftingTable : public AActor
 public:	
 	// Sets default values for this actor's properties
 	ACMChemicalCraftingTable();
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	TObjectPtr<UCameraComponent> Camera;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> ChemicalCraftingTable;

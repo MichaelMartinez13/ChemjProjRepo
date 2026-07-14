@@ -11,6 +11,8 @@ ACMChemicalCraftingTable::ACMChemicalCraftingTable()
 	ChemicalCraftingTable->SetupAttachment(GetRootComponent());
 	ChemicalCraftingTable->SetRelativeRotation(FRotator::ZeroRotator);
 
+	Camera = CreateDefaultSubobject<UCameraComponent>(TEXT("Camera"));
+
 }
 
 // Called when the game starts or when spawned
