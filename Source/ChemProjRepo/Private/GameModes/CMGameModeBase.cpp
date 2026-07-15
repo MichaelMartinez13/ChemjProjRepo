@@ -1,10 +1,9 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
-#include "Blueprint/UserWidget.h"
 #include "GameModes/CMGameModeBase.h"
+#include "Blueprint/UserWidget.h"
 #include "GameState/CMGameStateBase.h"
 #include "Character/Player/CMPlayerState.h"
-#include "GameModes/CMGameModeBase.h"
 #include "Kismet/GameplayStatics.h"
 #include "CMPlayerSaveGame.h"
 

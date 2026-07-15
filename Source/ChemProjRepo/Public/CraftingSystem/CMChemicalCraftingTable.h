@@ -5,6 +5,7 @@
 #include "CoreMinimal.h"
 #include "GameFramework/Actor.h"
 #include "Camera/CameraComponent.h"
+#include "Components/WidgetComponent.h"
 #include "CMChemicalCraftingTable.generated.h"
 
 UCLASS()
@@ -18,9 +19,18 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
 	TObjectPtr<UCameraComponent> Camera;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Camera")
+	TObjectPtr<UCameraComponent> PlayerCamera;
 
 	UPROPERTY(VisibleAnywhere)
 	TObjectPtr<UStaticMeshComponent> ChemicalCraftingTable;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Widget")
+	TObjectPtr<UWidgetComponent> CraftingWidget;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "IsWorking")
+	bool bIsStarted;
 
 protected:
 	// Called when the game starts or when spawned
