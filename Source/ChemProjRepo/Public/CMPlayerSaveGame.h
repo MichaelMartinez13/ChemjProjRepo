@@ -20,6 +20,7 @@ public:
 	FPlayerSaveData() 
 	{
 		Points = 0;
+		bHasIntroPlayed = false;
 		Location = FVector::ZeroVector;
 		Rotation = FRotator::ZeroRotator;
 		bResumeAtTransform = true;
@@ -31,6 +32,9 @@ public:
 
 	UPROPERTY()
 	int32 Points;
+	
+	UPROPERTY()
+	bool bHasIntroPlayed;
 	
 	UPROPERTY()
 	FRotator Rotation; 
@@ -75,6 +79,9 @@ public:
 
 	UPROPERTY(VisibleAnywhere, Category = "SaveData")
 	int32 PlayerScore = 0;
+	
+	UPROPERTY(VisibleAnywhere, Category = "SaveData")
+	bool bHasIntroPlayed = false;
 
 	UPROPERTY(VisibleAnywhere, Category = "SaveData")
 	FVector PlayerLocation = FVector::ZeroVector;

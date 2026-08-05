@@ -25,6 +25,7 @@ void ACMPlayerState::SavePlayerState(UCMPlayerSaveGame* SaveGame)
 		//Gather all the data of the player 
 		FPlayerSaveData SaveData; 
 		SaveData.Points = PointAttributeSet->GetBasePoints();
+		SaveData.bHasIntroPlayed = bHasIntroPlayed;
 	
 		//Store as FString(This is for steam, so I would not look into this too much).
 		SaveData.PlayerID = GetUniqueId().ToString();
@@ -50,6 +51,7 @@ void ACMPlayerState::LoadPlayerState(UCMPlayerSaveGame* SaveGame)
 		{
 			//Set the base points to the AttributeSet. 
 			PointAttributeSet->SetBasePoints(FoundData->Points);
+			bHasIntroPlayed = FoundData->bHasIntroPlayed;
 		}
 		else
 		{

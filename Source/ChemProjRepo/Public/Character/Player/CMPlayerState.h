@@ -54,5 +54,8 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "ASC | Attributes")
 	TObjectPtr <UCMPointAttributeSet> PointAttributeSet;
+	
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AnimationWidgets | IntroAnimation")
+	bool bHasIntroPlayed;
 
 };
