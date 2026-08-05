@@ -58,9 +58,11 @@ void ACMGameModeBase::CheckIfGameReady()
 void ACMGameModeBase::WriteSaveGame()
 {
 	//Clear the arrays 
-	CurrentSaveGame->SavedPlayerData.Empty();
-	CurrentSaveGame->SavedActorData.Empty();
-
+	if (IsValid(CurrentSaveGame)) 
+	{
+		CurrentSaveGame->SavedPlayerData.Empty();
+		CurrentSaveGame->SavedActorData.Empty();
+	}
 	AGameStateBase* PlayerGameState = GetWorld()->GetGameState();
 
 	if (!IsValid(PlayerGameState)) return;
