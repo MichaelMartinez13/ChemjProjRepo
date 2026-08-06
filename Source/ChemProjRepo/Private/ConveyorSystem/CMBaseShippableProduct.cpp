@@ -15,8 +15,8 @@ ACMBaseShippableProduct::ACMBaseShippableProduct() {
 	BoxCollision->SetCollisionObjectType(ECollisionChannel::ECC_PhysicsBody);
 	BoxCollision->SetCollisionResponseToAllChannels(ECR_Block);
 	BoxCollision->SetGenerateOverlapEvents(true);
-	BoxCollision->SetSimulatePhysics(true);
-	BoxCollision->SetMassOverrideInKg(NAME_None, 10.0f, true);
+
+	
 
 	BoxCollision->BodyInstance.bLockXRotation = true;
 	BoxCollision->BodyInstance.bLockYRotation = true;
@@ -24,4 +24,9 @@ ACMBaseShippableProduct::ACMBaseShippableProduct() {
 	StaticMesh = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("BaseStaticMesh"));
 	StaticMesh->SetupAttachment(BoxCollision);
 	StaticMesh->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+}
+void ACMBaseShippableProduct::BeginPlay() {
+	Super::BeginPlay();
+	BoxCollision->SetSimulatePhysics(true);
+	BoxCollision->SetMassOverrideInKg(NAME_None, 10.0f, true);
 }

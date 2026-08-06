@@ -23,6 +23,8 @@ class CHEMPROJREPO_API ACMBaseShippableProduct : public AActor
 public:
 	ACMBaseShippableProduct();
 
+	virtual void BeginPlay() override;
+
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Components")
 	TObjectPtr <UBoxComponent> BoxCollision;
 
