@@ -60,12 +60,8 @@ void ACMPlayerState::LoadPlayerState(UCMPlayerSaveGame* SaveGame)
 	}
 
 }
-/*
-void ACMPlayerState::HandleStartingNewPlayer_Implementation(ACMPlayerController* PlayerController)
-{
-	ACMPlayerState* PS = PlayerController->GetPlayerState<ACMPlayerState>();
-}
-*/
+
+
 
 
 

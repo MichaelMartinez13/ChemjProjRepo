@@ -86,6 +86,9 @@ void ACMGameModeBase::LoadSaveGame()
 {
 	if (UGameplayStatics::DoesSaveGameExist("PlayerSlot", 0)) 
 	{
+		USaveGame* LoadedGame = UGameplayStatics::LoadGameFromSlot("PlayerSlot", 0);
+		CurrentSaveGame = CastChecked<UCMPlayerSaveGame>(LoadedGame);
+		
 		if (!IsValid(CurrentSaveGame)) 
 		{
 			UE_LOG(LogTemp, Warning, TEXT("Failed to recall save slot"));
@@ -107,7 +110,7 @@ void ACMGameModeBase::LoadSaveGame()
 
 			}
 		}
-		UGameplayStatics::LoadGameFromSlot("PlayerSlot", 0);
+		//UGameplayStatics::LoadGameFromSlot("PlayerSlot", 0);
 		OnSaveGameLoaded.Broadcast(CurrentSaveGame);
 	}
 	else 
@@ -117,6 +120,16 @@ void ACMGameModeBase::LoadSaveGame()
 		UE_LOG(LogTemp, Error, TEXT("Created New Save game data!"));
 	}
 	
+}
+
+void ACMGameModeBase::HandleStartingNewPlayer_Implementation(APlayerController* NewPlayer)
+{
+	//ACMPlayerController* CMNewPlayer = Cast<ACMPlayerController>(NewPlayer);
+	
+	Super::HandleStartingNewPlayer_Implementation(NewPlayer);
+
+	LoadSaveGame();
+	UE_LOG(LogTemp, Warning, TEXT("CurrentSaveGame valid after load: %s"), IsValid(CurrentSaveGame) ? TEXT("true") : TEXT("false"));
 }
 //void ACMGameModeBase::HandleStartingNewPlayer_Implementation(APlayerController* Player)
 //{

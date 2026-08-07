@@ -40,9 +40,8 @@ public:
 	void LoadPlayerState(UCMPlayerSaveGame* SaveGame);
 	
 	//UFUNCTION()
-	//void HandleStartingNewPlayer_Implementation(ACMPlayerController* PlayerController);
 	
-
+	
 
 protected:
 	
