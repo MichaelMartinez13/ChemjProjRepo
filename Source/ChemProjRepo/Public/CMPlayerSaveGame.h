@@ -17,6 +17,8 @@ struct FPlayerSaveData
 	GENERATED_BODY()
 
 public:  
+
+	//Constructor
 	FPlayerSaveData() 
 	{
 		Points = 0;

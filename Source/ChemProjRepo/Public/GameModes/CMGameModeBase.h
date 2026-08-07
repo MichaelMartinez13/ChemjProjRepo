@@ -59,6 +59,9 @@ public: //FUNCTIONS
 	
 	UFUNCTION(BlueprintCallable, Category = "SaveGame")
 	void LoadSaveGame();
+	
+	UFUNCTION(BlueprintCallable, Category = "SaveGame")
+	void DeleteSaveGame();
 
 	//virtual void HandleStartingNewPlayer_Implementation(APlayerController* Player) override;
 

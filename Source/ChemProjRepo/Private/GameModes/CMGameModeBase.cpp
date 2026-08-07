@@ -132,6 +132,13 @@ void ACMGameModeBase::LoadSaveGame()
 	
 }
 
+void ACMGameModeBase::DeleteSaveGame()
+{
+	UGameplayStatics::DeleteGameInSlot("PlayerSlot", 0);
+	CurrentSaveGame = CastChecked<UCMPlayerSaveGame>(UGameplayStatics::CreateSaveGameObject(UCMPlayerSaveGame::StaticClass()));
+	UE_LOG(LogTemp, Warning, TEXT("Deleted Save Game Data!"));
+}
+
 void ACMGameModeBase::HandleStartingNewPlayer_Implementation(APlayerController* NewPlayer)
 {
 	//ACMPlayerController* CMNewPlayer = Cast<ACMPlayerController>(NewPlayer);
