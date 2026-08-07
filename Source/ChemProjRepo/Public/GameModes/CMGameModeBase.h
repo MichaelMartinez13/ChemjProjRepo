@@ -50,7 +50,7 @@ public: //FUNCTIONS
 
 	//This function is called when a new player joins the game. 
 	//It is responsible for initializing the player's state and loading their save data.
-	virtual void HandleStartingNewPlayer_Implementation(APlayerController* NewPlayer) override;
+	//virtual void HandleStartingNewPlayer_Implementation(APlayerController* NewPlayer) override;
 	
 	void CheckIfGameReady();
 

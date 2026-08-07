@@ -139,20 +139,13 @@ void ACMGameModeBase::DeleteSaveGame()
 	UE_LOG(LogTemp, Warning, TEXT("Deleted Save Game Data!"));
 }
 
-void ACMGameModeBase::HandleStartingNewPlayer_Implementation(APlayerController* NewPlayer)
-{
-	//ACMPlayerController* CMNewPlayer = Cast<ACMPlayerController>(NewPlayer);
-	
-	Super::HandleStartingNewPlayer_Implementation(NewPlayer);
-
-	LoadSaveGame();
-	UE_LOG(LogTemp, Warning, TEXT("CurrentSaveGame valid after load: %s"), IsValid(CurrentSaveGame) ? TEXT("true") : TEXT("false"));
-}
-//void ACMGameModeBase::HandleStartingNewPlayer_Implementation(APlayerController* Player)
+//void ACMGameModeBase::HandleStartingNewPlayer_Implementation(APlayerController* NewPlayer)
 //{
-	//ACMPlayerState* PlayerState = Player->GetPlayerState<ACMPlayerState>();
-	//if (IsValid(PlayerState))
-	//{
-		//PlayerState->LoadPlayerState(CurrentSaveGame);
-	//}
+//	//ACMPlayerController* CMNewPlayer = Cast<ACMPlayerController>(NewPlayer);
+//	
+//	Super::HandleStartingNewPlayer_Implementation(NewPlayer);
+//
+//	LoadSaveGame();
+//	UE_LOG(LogTemp, Warning, TEXT("CurrentSaveGame valid after load: %s"), IsValid(CurrentSaveGame) ? TEXT("true") : TEXT("false"));
 //}
+
