@@ -31,6 +31,16 @@ void ACMGameModeBase::Logout(AController* PlayerExit)
 	WriteSaveGame();
 }
 
+void ACMGameModeBase::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	if (EndPlayReason == EEndPlayReason::Quit)
+	{
+		WriteSaveGame();
+	}
+
+	Super::EndPlay(EndPlayReason);
+}
+
 void ACMGameModeBase::CheckIfGameReady()
 {
 	ACMGameStateBase* PlayerGameState = Cast<ACMGameStateBase>(GameState);

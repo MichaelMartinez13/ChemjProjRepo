@@ -44,6 +44,9 @@ public: //FUNCTIONS
 
 	virtual void Logout(AController* PlayerExit) override;
 
+	//This logs to the engine wether the game is ending or not. 
+	// If it is, it will write the save game data to disk.
+	virtual void EndPlay(const EEndPlayReason::Type EndPlayReason) override;
 
 	//This function is called when a new player joins the game. 
 	//It is responsible for initializing the player's state and loading their save data.
